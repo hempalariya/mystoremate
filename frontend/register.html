@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyStoreMate register</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav>
+          <div class="logo">
+            <a href="/">
+              <img src="./images/logo.png" alt="image of logo" />
+            </a>
+          </div>
+          <div class="user-action">
+            <p>Existing User &rArr;</p>
+            <a href="/login.html" class="action action-login">Login</a>
+          </div>
+        </nav>
+      </header>
+      <section class="register">
+        <div class="register-container">
+
+          <h1>Register</h1>
+          <form action="" class="register-form">
+            <div class="form-controller">
+              <label for="shop-name">Name of The Shop</label>
+              <input type="text" name="shop-name" required />
+            </div>
+            <div class="form-controller">
+              <label for="name">Shopkeeper's Name</label>
+              <input type="text" name="name" required />
+            </div>
+            <div class="form-controller">
+              <label for="email">Email</label>
+              <input type="email" name="email" required />
+            </div>
+            <div class="form-controller">
+              <label for="number">Mobile Number</label>
+              <input type="text" name="number" required />
+            </div>
+            <div class="form-controller">
+              <label for="password">Password</label>
+              <input type="password" name="password" required />
+            </div>
+            <button class="button action-button register-button">Register</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
