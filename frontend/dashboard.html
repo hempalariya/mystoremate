@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyStoreMate Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="dashboard.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="images/logo.png" alt="" />
+      </div>
+      <div class="title">
+        <p>Welcome <span class="shopkeeper-name"></span></p>
+        <button type="button" class="btn logout-btn">Log Out</button>
+      </div>
+    </header>
+    <main>
+      <div class="summary">
+        <div>
+          <h1>24</h1>
+          <p>Total Products</p>
+        </div>
+        <div>
+          <h1>4</h1>
+          <p>Near Expiry</p> 
+        </div> 
+        <div>
+          <h1>3</h1>
+          <p>Resale</p>
+        </div>
+        <div>
+          <h1>2</h1>
+          <p>Out of Stock</p>
+        </div>
+      </div>
+      <div class="store-action-horizontal-tab">
+        <ul class="store-action-tabs-list">
+          <li>
+            <a href="#add-new-product" class="store-action"
+              >Add New Product</a
+            >
+          </li>
+          <li><a href="#my-products" class="store-action">My Products</a></li>
+          <li><a href="#resale-items" class="store-action">Resale Items</a></li>
+          <li><a href="#expiry-items" class="store-action">Expiry Items</a></li>
+        </ul>
+        <div class="store-action-tab-content">
+          <div id="add-new-product">
+            <h2>Add New Product</h2>
+            <form action="" class="add-product-form">
+              <div class="form-control">
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" required />  
+              </div>
+              <div class="form-control">
+                <label for="product-category">Product Category</label>
+                <input type="text" id="product-category" required />  
+              </div>
+              <div class="form-control">
+                <label for="product-mrp">MRP</label>
+                <input type="number" id="product-mrp" required />  
+              </div>
+              <div class="form-control">
+                <label for="product-cost">Cost Prize</label>
+                <input type="number" id="product-cost" required />  
+              </div>
+              <div class="form-control">
+                <label for="product-quantity">Product Quantity</label>
+                <input type="number" id="product-quantity" required />  
+              </div>
+              <div class="form-control">
+                <label for="product-expiry">Product Expiry</label>
+                <input type="date" id="product-expiry" required />  
+              </div>
+              <button class="btn add-product-btn">Add</button>
+            </form>
+          </div>
+          <div id="my-products">
+            <h2>My Products</h2>
+            <table class=" table product-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Qty</th>
+                  <th>MRP</th>
+                  <th>Cost Price</th>
+                  <th>Expiry</th>
+                  <th>Resale</th>
+                  <th>Near Expiry</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Surf Excel</td>
+                  <td>12</td>
+                  <td>100</td>
+                  <td>80</td>
+                  <td>12-05-2026</td>
+                  <td><input type="checkbox" class="check"></td>
+                  <td><input type="checkbox" class="check"></td>
+                  <td><button type="button">✏️</button></td>
+                  <td><button type="button">🗑️</button> </td>
+                </tr>
+                <tr>
+                  <td>Maggi</td>
+                  <td>0</td>
+                  <td>50</td>
+                  <td>42</td>
+                  <td></td>
+                  <td><input type="checkbox" class="check"></td>
+                  <td><input type="checkbox" class="check"></td>
+                  <td><button type="button">✏️</button></td>
+                  <td><button type="button">🗑️</button> </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="resale-items">
+            <h2>Resale Products</h2>
+            <table class="table resale-table">
+              <thead>
+                <tr>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Quantity
+                  </th>
+                  <th>
+                    Price
+                  </th>
+                  <th>
+                    Expiry Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Maggi</td>
+                  <td>15</td>
+                  <td>42</td>
+                  <td>12-07-2026</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="expiry-items">
+            <h2>Expired Products</h2>
+            <table class="table resale-table">
+              <thead>
+                <tr>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Quantity
+                  </th>
+                  <th>
+                    Price
+                  </th>
+                  <th>
+                    Expiry Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Maggi</td>
+                  <td>15</td>
+                  <td>42</td>
+                  <td>12-07-2026</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

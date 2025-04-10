@@ -40,7 +40,7 @@ header nav .logo img {
 }
 
 header nav .user-action {
-  display: flex;
+  display: flex; 
   gap: 2rem;
   align-items: center;
 }
