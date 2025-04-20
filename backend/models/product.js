@@ -16,7 +16,10 @@ const productSchema = new mongoose.Schema({
   resaleQuantity: {type: Number, default: 0},
   resalePrice: {type: Number},
   isNearExpiry: { type: Boolean, default: false },
+  isExpired: {type: Boolean, default: false}, 
+  listedForDiscount: {type: Boolean, default: false},
   discount: { type: Number, default: 0 },
+  outOfStock: {type: Boolean,default: false}
 },{timestamps: true});
 
 module.exports = mongoose.model("Product", productSchema); 

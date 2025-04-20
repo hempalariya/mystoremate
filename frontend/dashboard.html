@@ -20,32 +20,61 @@
     <main>
       <div class="summary">
         <div>
-          <h1>24</h1>
+          <h1 class="product-count">24</h1>
           <p>Total Products</p>
         </div>
         <div>
-          <h1>4</h1>
-          <p>Near Expiry</p> 
-        </div> 
+          <h1 class="near-expiry-count">4</h1>
+          <p>Near Expiry</p>
+        </div>
         <div>
-          <h1>3</h1>
+          <h1 class="resale-count">3</h1>
           <p>Resale</p>
         </div>
         <div>
-          <h1>2</h1>
+          <h1 class="out-of-stock-count">2</h1>
           <p>Out of Stock</p>
+        </div>
+        <div>
+          <h1 class="expired-count">2</h1>
+          <p>Expired</p>
         </div>
       </div>
       <div class="store-action-horizontal-tab">
         <ul class="store-action-tabs-list">
           <li>
-            <a href="#add-new-product" class="store-action"
+            <a href="#add-new-product" class="store-action active"
               >Add New Product</a
+            >
+          </li>
+          <li>
+            <a href="#sold-product" class="store-action"
+              >Sold Product</a
+            >
+          </li>
+          <li>
+            <a href="#sale-stats" class="store-action"
+              >Sale Stats</a
             >
           </li>
           <li><a href="#my-products" class="store-action">My Products</a></li>
           <li><a href="#resale-items" class="store-action">Resale Items</a></li>
-          <li><a href="#expiry-items" class="store-action">Expiry Items</a></li>
+          <li>
+            <a href="#near-expiry-items" class="store-action"
+              >Near Expiry Items</a
+            >
+          </li>
+          <li>
+            <a href="#discounted-items" class="store-action"
+              >Discounted Items</a
+            >
+          </li>
+          <li>
+            <a href="#expired-items" class="store-action">Epired Items</a>
+          </li>
+          <li>
+            <a href="#nearby-resale" class="store-action">Nearby Resale</a>
+          </li>
         </ul>
         <div class="store-action-tab-content">
           <div id="add-new-product">
@@ -53,34 +82,89 @@
             <form action="" class="add-product-form">
               <div class="form-control">
                 <label for="product-name">Product Name</label>
-                <input type="text" id="product-name" required />  
+                <input type="text" id="product-name" required />
               </div>
               <div class="form-control">
                 <label for="product-category">Product Category</label>
-                <input type="text" id="product-category" required />  
+                <input type="text" id="product-category" required />
               </div>
               <div class="form-control">
                 <label for="product-mrp">MRP</label>
-                <input type="number" id="product-mrp" required />  
+                <input type="number" id="product-mrp" required />
               </div>
               <div class="form-control">
                 <label for="product-cost">Cost Prize</label>
-                <input type="number" id="product-cost" required />  
+                <input type="number" id="product-cost" required />
               </div>
               <div class="form-control">
                 <label for="product-quantity">Product Quantity</label>
-                <input type="number" id="product-quantity" required />  
+                <input type="number" id="product-quantity" required />
               </div>
               <div class="form-control">
                 <label for="product-expiry">Product Expiry</label>
-                <input type="date" id="product-expiry" required />  
+                <input type="date" id="product-expiry" required />
               </div>
               <button class="btn add-product-btn">Add</button>
             </form>
           </div>
+          <div id="sold-product">
+            <h2>Sold Products</h2>
+            <form action="" class="sold-product-form">
+              <div class="form-control">
+                <label for="sold-product-name">Product Name</label>
+                <input type="text" id="sold-product-name" required />
+              </div>
+              <div class="form-control">
+                <label for="sold-product-mrp">MRP</label>
+                <input type="number" id="sold-product-mrp" required />
+              </div>
+              <div class="form-control">
+                <label for="sold-product-cost">Cost Prize</label>
+                <input type="number" id="sold-product-cost" required />
+              </div>
+              <div class="form-control">
+                <label for="sold-product-quantity">Product Quantity</label>
+                <input type="number" id="sold-product-quantity" required />
+              </div>
+              <button class="btn add-sold-product-btn">Add</button>
+            </form>
+          </div>
+          <div id="sale-stats">
+            <h2>Sale Stats  (Last 30 days)</h2>
+            <div class="aggregate-sale-stats">
+              <table class="table aggregate-table">
+                <thead>
+                  <tr>
+                    <th>Total Purchase</th>
+                    <th>Total Sale</th>
+                    <th>Profit/Loss</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="stats-filter">
+              <button type="button" class="btn salewise-stats-btn">Sale Wise</button>
+              <button type="button" class="btn producwise-stats-btn">Product Wise</button>
+            </div>
+            <table class="table stats-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Qty</th>
+                  <th>MRP</th>
+                  <th>Cost Price</th>
+                  <th>Profit/loss</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            
+          </div>
           <div id="my-products">
             <h2>My Products</h2>
-            <table class=" table product-table">
+            <table class="table product-table">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -90,13 +174,11 @@
                   <th>Expiry</th>
                   <th>Edit</th>
                   <th>Near Expiry</th>
-              
+
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
-               
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
           <div id="resale-items">
@@ -104,46 +186,78 @@
             <table class="table resale-table">
               <thead>
                 <tr>
-                  <th>
-                    Name
-                  </th>
-                  <th>
-                    Quantity
-                  </th>
-                  <th>
-                    Price
-                  </th>
-                  <th>
-                    Expiry Date
-                  </th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Expiry Date</th>
                 </tr>
               </thead>
-              <tbody>
-                
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
-          <div id="expiry-items">
-            <h2>Expired Products</h2>
+
+          <div id="near-expiry-items">
+            <h2>Near Expired Products</h2>
             <table class="table near-expiry-table">
               <thead>
                 <tr>
-                  <th>
-                    Name
-                  </th>
-                  <th>
-                    Quantity
-                  </th>
-                  <th>
-                    Price
-                  </th>
-                  <th>
-                    Expiry Date
-                  </th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Expiry Date</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="discounted-items">
+            <h2>Discounted Products</h2>
+            <table class="table discount-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Discount Percent</th>
+                  <th>Price</th>
+                  <th>Expiry Date</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="expired-items">
+            <h2>Expired Products</h2>
+            <table class="table expired-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="nearby-resale">
+            <h2>Nearby Resale</h2>
+            <table class="table nearby-resale-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>MRP</th>
+                  <th>Shop Name</th>
+                  <th>Contact</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-               
+                <!-- <td>maggi</td>
+               <td>15</td>
+               <td>9.00</td>
+               <td>abc</td>
+               <td>123654</td>
+               <td><button type="button" class="btn intrested-btn">intrested</button></td> -->
               </tbody>
             </table>
           </div>

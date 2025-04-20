@@ -1,5 +1,40 @@
 "use strict";
 
+if (document.title === "MyStoreMate Discount Items") {
+  const discountItemList = document.querySelector(".discout-item-list")
+
+
+  const fetchDiscountProducts = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/products/discount/list"
+      );
+      const data = await response.json();
+      console.log(data)
+      data.forEach(item => {
+        const cartHtml = `<div class="card">
+            <header>
+                <h1>${item.discount}% off</h1>
+            </header>
+            <div class="card-details">
+                <h2>${item.name}</h2>
+                <div> 
+                    <p>At ${item.shopkeeper.shopName}</p>
+                    <p>MRP: <span>${item.mrp}.00</span></p>
+                </div>
+            </div>
+        </div>`
+
+        discountItemList.insertAdjacentHTML('afterbegin', cartHtml)
+      })
+    } catch (error) {}
+  };
+
+  fetchDiscountProducts();
+
+
+}
+
 //*****************************-----register_user-------***********************************************/
 
 if (document.title === "MyStoreMate register") {
@@ -24,7 +59,7 @@ if (document.title === "MyStoreMate register") {
         mobile,
         password,
       };
-      try { 
+      try {
         const response = await fetch("http://localhost:8000/api/users", {
           method: "POST",
           body: JSON.stringify(user),
@@ -44,30 +79,31 @@ if (document.title === "MyStoreMate register") {
       }
     });
 }
- 
+
 if (document.title === "MyStoreMate login") {
-  document.querySelector(".login-form").addEventListener("submit", async (e) =>{
-    e.preventDefault()
-    const email = document.querySelector('#login-email').value
-    const password = document.querySelector('#login-password').value
+  document
+    .querySelector(".login-form")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.querySelector("#login-email").value;
+      const password = document.querySelector("#login-password").value;
 
-    try{
-      const response = await fetch("http://localhost:8000/api/users/login", {
-        method: 'POST',
-        body:JSON.stringify({email, password}),
-        headers: {"Content-Type":"application/json"}
-      })
+      try {
+        const response = await fetch("http://localhost:8000/api/users/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: { "Content-Type": "application/json" },
+        });
 
-      const data = await response.json()
+        const data = await response.json();
 
-      if(response.ok){
-        localStorage.setItem("shopkeeper", JSON.stringify(data))
-        alert('logged in successfully')
-        window.location.href = 'dashboard.html'
+        if (response.ok) {
+          localStorage.setItem("shopkeeper", JSON.stringify(data));
+          alert("logged in successfully");
+          window.location.href = "dashboard.html";
+        }
+      } catch (error) {
+        console.error("error:", error);
       }
-
-    }catch(error){
-      console.error('error:', error)
-    }
-  })
+    });
 }
