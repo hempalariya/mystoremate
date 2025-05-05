@@ -14,7 +14,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes); 
 
 const PORT = process.env.PORT || 8000;
-mongoose.connect(process.env.MONGOURI).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
   app.listen(PORT, () => console.log("listening on port " + PORT));
 });
  

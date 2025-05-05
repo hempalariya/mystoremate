@@ -266,7 +266,6 @@ const saleSummary = async (req, res) => {
   thirtyDaysAgo.setHours(0, 0, 0, 0); // start of day
 
   try {
-    // Get all sold products in last 30 days
     const sales = await SoldProduct.find({
       shopkeeper: req.user.id,
       createdAt: { $gte: thirtyDaysAgo },
@@ -276,7 +275,6 @@ const saleSummary = async (req, res) => {
       return res.status(400).json({ error: "No record found." });
     }
 
-    // Calculate total sale, purchase and profit/loss manually
     let totalSale = 0;
     let totalPurchase = 0;
 
@@ -305,8 +303,8 @@ const getSalewiseStats = async (req, res) => {
   try {
     const sales = await SoldProduct.find({
       shopkeeper: req.user.id,
-      createdAt: { $gte: thirtyDaysAgo }
-    })
+      createdAt: { $gte: thirtyDaysAgo },
+    });
 
     res.status(200).json(sales);
   } catch (error) {
@@ -314,38 +312,60 @@ const getSalewiseStats = async (req, res) => {
   }
 };
 
-
 //productwise stats
 
 const getProductWiseStats = async (req, res) => {
-  try {
-    const stats = await SoldProduct.aggregate([
-      { $match: { shopkeeper: req.user._id } },
-      {
-        $group: {
-          _id: "$name",
-          totalQuantity: { $sum: "$quantity" },
-          totalSale: { $sum: { $multiply: ["$mrp", "$quantity"] } },
-          totalPurchase: { $sum: { $multiply: ["$costPrice", "$quantity"] } },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          name: "$_id",
-          totalQuantity: 1,
-          totalSale: 1,
-          totalPurchase: 1,
-          profitOrLoss: { $subtract: ["$totalSale", "$totalPurchase"] },
-        },
-      },
-    ]);
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  thirtyDaysAgo.setHours(0, 0, 0, 0); // normalize to start of day
 
-    res.status(200).json(stats);
+  try {
+    const sales = await SoldProduct.find({
+      shopkeeper: req.user.id,
+      createdAt: { $gte: thirtyDaysAgo },
+    });
+
+    if (sales.length === 0) {
+      return res.status(200).json([]); // return empty if no recent sales
+    }
+
+    const groupedStats = {};
+
+    sales.forEach((sale) => {
+      const key = `${sale.name}-${sale.mrp}-${sale.costPrice}`;
+      if (!groupedStats[key]) {
+        groupedStats[key] = {
+          name: sale.name,
+          mrp: sale.mrp,
+          costPrice: sale.costPrice,
+          totalQuantity: 0,
+          totalSale: 0,
+          totalPurchase: 0,
+        };
+      }
+
+      groupedStats[key].totalQuantity += sale.quantity;
+      groupedStats[key].totalSale += sale.mrp * sale.quantity;
+      groupedStats[key].totalPurchase += sale.costPrice * sale.quantity;
+    });
+
+    const result = Object.values(groupedStats).map((item) => ({
+      name: item.name,
+      mrp: item.mrp,
+      costPrice: item.costPrice,
+      totalQuantity: item.totalQuantity,
+      totalSale: item.totalSale,
+      totalPurchase: item.totalPurchase,
+      profitOrLoss: item.totalSale - item.totalPurchase,
+    }));
+
+    res.status(200).json(result);
   } catch (error) {
+    console.error("Error in productwise stats:", error.message);
     res.status(500).json({ error: error.message });
   }
 };
+
 
 module.exports = {
   addProduct,

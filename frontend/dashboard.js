@@ -12,9 +12,7 @@ const discountTableBody = document.querySelector(".discount-table tbody");
 const expiredTableBody = document.querySelector(".expired-table tbody");
 const nearbyResaleTableBody = document.querySelector(".nearby-resale-table tbody");
 const aggregateTableBody = document.querySelector('.aggregate-table tbody')
-console.log(aggregateTableBody)
-
-
+const statsTableBody = document.querySelector('.stats-table tbody')
 
 
 const productCount = document.querySelector(".product-count");
@@ -22,6 +20,9 @@ const nearExpiryCount = document.querySelector(".near-expiry-count");
 const resaleCount = document.querySelector(".resale-count");
 const outOfStockCount = document.querySelector(".out-of-stock-count");
 const expiredCount = document.querySelector(".expired-count");
+
+const statesFilter = document.querySelector(".stats-filter")
+
 
 let products = [];
 let resaleProducts = [];
@@ -347,7 +348,8 @@ const fetchAndDisplayAggregate = async () =>{
 
 fetchAndDisplayAggregate()
 
-/***************************-------------display-stats--------------*******************************************/
+
+
 /************salewise ***********/
 const fetchSaleData = async () => {
   try{
@@ -358,17 +360,79 @@ const fetchSaleData = async () => {
         "Content-Type": "application/json",
       },
     })
-
+    
     const data = await response.json()
 
-    console.log(data)
+    if(response.ok){
+      statsTableBody.innerHTML = ''
+      data.forEach((item) => {
+        const row = document.createElement("tr");
 
+        row.innerHTML = `
+                <td>${item.name}</td>
+               <td>${item.quantity}</td>
+               <td>${item.mrp}</td>
+               <td>${item.costPrice}</td>
+               <td>--</td>
+               
+      `;
+        statsTableBody.appendChild(row);
+      });
+    }
+    
   }catch(error){
     console.error('error fetching data')
   }
 }
+/************productwise ***********/
+const fetchSaleProductData = async () => {
+  try {
+    const response = await fetch('http://localhost:8000/api/products/sale/productwise', {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${shopkeeper.token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-fetchSaleData()
+    const data = await response.json();
+    console.log(data)
+    if(response.ok){
+      statsTableBody.innerHTML = ''
+      data.forEach((item) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+                <td>${item.name}</td>
+               <td>${item.totalQauntity}</td>
+               <td>${item.mrp}</td>
+               <td>${item.costPrice}</td>
+               <td>${item.profitOrLoss}</td>
+               
+      `;
+        statsTableBody.appendChild(row);
+      });
+    }
+
+  } catch (error) {
+    console.error('error fetching productwise sale data', error);
+  }
+};
+
+
+/***************************-------------display-stats--------------*******************************************/
+
+statesFilter.addEventListener('click', (e) => {
+  const targetBtn = e.target.closest('button')
+  if(!targetBtn) return
+  if(targetBtn.classList.contains('salewise')){
+    fetchSaleData()
+  }
+  if(targetBtn.classList.contains('productwise')){
+    console.log('por')
+    fetchSaleProductData()
+  }
+})
 /***************************-------------------logout & welcome----------------*******************************************/
 document.querySelector(".shopkeeper-name").textContent =
   shopkeeper.ownerName.toUpperCase();
