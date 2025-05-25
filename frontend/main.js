@@ -1,17 +1,16 @@
 "use strict";
 
 if (document.title === "MyStoreMate Discount Items") {
-  const discountItemList = document.querySelector(".discout-item-list")
-
+  const discountItemList = document.querySelector(".discout-item-list");
 
   const fetchDiscountProducts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/products/discount/list"
+        "https://my-store-mate-api.onrender.com/api/products/discount/list"
       );
       const data = await response.json();
-      console.log(data)
-      data.forEach(item => {
+      console.log(data);
+      data.forEach((item) => {
         const cartHtml = `<div class="card">
             <header>
                 <h1>${item.discount}% off</h1>
@@ -23,16 +22,14 @@ if (document.title === "MyStoreMate Discount Items") {
                     <p>MRP: <span>${item.mrp}.00</span></p>
                 </div>
             </div>
-        </div>`
+        </div>`;
 
-        discountItemList.insertAdjacentHTML('afterbegin', cartHtml)
-      })
+        discountItemList.insertAdjacentHTML("afterbegin", cartHtml);
+      });
     } catch (error) {}
   };
 
   fetchDiscountProducts();
-
-
 }
 
 //*****************************-----register_user-------***********************************************/
@@ -60,11 +57,14 @@ if (document.title === "MyStoreMate register") {
         password,
       };
       try {
-        const response = await fetch("http://localhost:8000/api/users", {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await fetch(
+          "https://my-store-mate-api.onrender.com/api/users",
+          {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         const data = await response.json();
         console.log(response, data);
         if (response.ok) {
@@ -89,11 +89,14 @@ if (document.title === "MyStoreMate login") {
       const password = document.querySelector("#login-password").value;
 
       try {
-        const response = await fetch("http://localhost:8000/api/users/login", {
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await fetch(
+          "https://my-store-mate-api.onrender.com/api/users/login",
+          {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
         const data = await response.json();
 

@@ -64,7 +64,7 @@ tabContainer.addEventListener("click", (e) => {
 
 const fetchAndDisplayProducts = async () => {
   try {
-    const response = await fetch("http://localhost:8000/api/products", {
+    const response = await fetch("https://my-store-mate-api.onrender.com/api/products", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${shopkeeper.token}`,
@@ -133,7 +133,7 @@ fetchAndDisplayProducts();
 
 const fetchAndDisplayResaleProducts = async () => {
   try {
-    const response = await fetch("http://localhost:8000/api/products/resale", {
+    const response = await fetch("https://my-store-mate-api.onrender.com/api/products/resale", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${shopkeeper.token}`,
@@ -173,7 +173,7 @@ fetchAndDisplayResaleProducts();
 const fetchAndDisplayNearExpiryProducts = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8000/api/products/near-expiry",
+      "https://my-store-mate-api.onrender.com/api/products/near-expiry",
       {
         method: "GET",
         headers: {
@@ -209,7 +209,7 @@ fetchAndDisplayNearExpiryProducts();
 const fetchAndDisplayDiscountedProducts = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8000/api/products/discount",
+      "https://my-store-mate-api.onrender.com/api/products/discount",
       {
         method: "GET",
         headers: {
@@ -244,7 +244,7 @@ fetchAndDisplayDiscountedProducts();
 
 const fetchAndDisplayExpiredProducts = async () => {
   try {
-    const response = await fetch("http://localhost:8000/api/products/expired", {
+    const response = await fetch("https://my-store-mate-api.onrender.com/api/products/expired", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${shopkeeper.token}`,
@@ -278,7 +278,7 @@ fetchAndDisplayExpiredProducts();
 const fetchAndDisplayNearbyResaleProducts = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8000/api/products/resale/nearby",
+      "https://my-store-mate-api.onrender.com/api/products/resale/nearby",
       {
         method: "GET",
         headers: {
@@ -316,7 +316,7 @@ fetchAndDisplayNearbyResaleProducts();
 
 const fetchAndDisplayAggregate = async () =>{
   try{
-    const response = await fetch("http://localhost:8000/api/products/sale/summary", {
+    const response = await fetch("https://my-store-mate-api.onrender.com/api/products/sale/summary", {
       method: "GET",
         headers: {
           Authorization: `Bearer ${shopkeeper.token}`,
@@ -353,7 +353,7 @@ fetchAndDisplayAggregate()
 /************salewise ***********/
 const fetchSaleData = async () => {
   try{
-    const response = await fetch('http://localhost:8000/api/products/sale',{
+    const response = await fetch('https://my-store-mate-api.onrender.com/api/products/sale',{
       method: "GET",
       headers: {
         Authorization: `Bearer ${shopkeeper.token}`,
@@ -387,7 +387,7 @@ const fetchSaleData = async () => {
 /************productwise ***********/
 const fetchSaleProductData = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/products/sale/productwise', {
+    const response = await fetch('https://my-store-mate-api.onrender.com/api/products/sale/productwise', {
       method: "GET",
       headers: {
         Authorization: `Bearer ${shopkeeper.token}`,
@@ -458,7 +458,7 @@ document
     const product = { name, category, mrp, costPrice, quantity, expiryDate };
 
     try {
-      const response = await fetch("http://localhost:8000/api/products", {
+      const response = await fetch("https://my-store-mate-api.onrender.com/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -490,7 +490,7 @@ document.querySelector('.sold-product-form').addEventListener('submit', async (e
   const quantity = parseInt(document.querySelector('#sold-product input[id="sold-product-quantity"]').value);
 
   try {
-    const response = await fetch("http://localhost:8000/api/products/sold", {
+    const response = await fetch("https://my-store-mate-api.onrender.com/api/products/sold", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -534,7 +534,7 @@ productTableBody.addEventListener("click", async (e) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/products/resale/${productId}`,
+        `https://my-store-mate-api.onrender.com/api/products/resale/${productId}`,
         {
           method: "PATCH",
           headers: {
@@ -580,7 +580,7 @@ productTableBody.addEventListener("click", async (e) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/products/discount/${productId}`,
+        `https://my-store-mate-api.onrender.com/api/products/discount/${productId}`,
         {
           method: "PATCH",
           headers: {
